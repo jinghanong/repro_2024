@@ -1,0 +1,106 @@
+---
+title: "First try in Quarto"
+author: "Jing Han"
+#date: "9/5/2024"
+date: today #new date every time you load the rmd
+format: 
+  html:
+    toc: true # table of content
+bibliography: references.bib
+---
+
+```{r}
+#| label: load-packages
+#| include: false
+
+library(tidyverse)
+
+```
+
+## Formatting
+
+**BOLD** two stars on each side, ~~strikethrough~~ two wavy strides on each side etc etc.
+
+Go to Help -\> "markdown quick reference"
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+-   one
+
+-   two
+
+-   three
+
+## Starting Fresh
+
+(top right green button) +c or shortcut: ctrl+alt+I
+
+### Loading data
+
+"label:setup" will always run first "include: false" will not show this codechunk and any of its output/warnings but will still runs it.
+
+```{r}
+#| label: setup 
+#| include: false
+library(tidyverse)
+library(knitr)
+library(palmerpenguins)
+```
+
+After loading the data, lets make a plot: "warning: false" hides all warnings. "code-fold: true" will allow the code to be folded into a section that could be seen if clicked on it
+
+```{r}
+#| warning: false
+#| code-fold: true
+#| label: fig-box
+#| fig-cap: "Boxplot of penguin body mass (in grams) by sex"
+ggplot(penguins, aes(x = sex, y = body_mass_g))+
+  geom_boxplot()
+```
+
+As you can see in @fig-box, males are larger than females. You can also see this in @tbl-sample "\@ something" to cross reference.
+
+```{r}
+#| label: tbl-sample
+#| tbl-cap: "Sample sizes of penguins by sex and island"
+kable(table(penguins$sex, penguins$island, useNA = "always"))
+```
+
+### Citations
+
+In [@Haidr2023], the authors discuss nothing related to this markdown. search "\\citation"
+
+### Texting different symbols
+
+*italics* \*italics\*
+
+$a+b=\gamma$
+
+equation block \$\$
+
+$$ 
+
+\frac{a}{b} = \sum\_{k=1}\^{\inf}(q+\beta) 
+$$
+
+{#eq-fake}
+as you can see from @eq-fake, we dont know what he is doing with this equation, but thats how you name an equation and reference it :)
