@@ -60,3 +60,29 @@ penguins_species_total <- penguins_data |>
 
 # commit to git but how? i am stuck on demo-repo 2024 
 # Change project!
+
+# 20 mins gap
+
+
+# Joins
+
+island_coordinates <- data.frame(
+  island = c("Biscoe", "Dream", "Torgersen"),
+  latitude = c(-65.433, -64.733, -64.766),
+  longtitude = c(-65.5, -64.344, -64.083)
+)
+
+penguins_coords <- left_join(penguins_data, island_coordinates)
+
+ggplot(penguins_coords, aes(longtitude, latitude, size = body_mass_g, color = species)) +
+  geom_jitter(alpha = .3) +
+  scale_color_viridis_d(option = "mako", begin = .2, end = .8)
+
+ggplot(penguins_coords, aes(latitude, body_mass_g, color = species)) +
+  geom_jitter(alpha = .3) +
+  scale_color_viridis_d(option = "mako", begin = .2, end = .8)
+
+# good reproducible workflow
+# save changes
+# committing changes
+# pull
